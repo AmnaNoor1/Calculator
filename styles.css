@@ -24,11 +24,20 @@
 .input {
   background-color: rgb(54, 58, 58);
   width: 100%;
-  padding: 20px;
-  margin: 0 1px;
+  padding: 15px;
   font-size: 42px;
   color: white;
-  margin-bottom: 3px;
+  margin-bottom: 2px;
+  border: none;
+}
+
+.history {
+  background-color: rgb(54, 58, 58);
+  width: 100%;
+  padding: 2px 15px;
+  font-size: 18px;
+  color: rgba(156, 147, 147, 0.548);
+  border: none;
 }
 
 .button {

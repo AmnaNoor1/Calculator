@@ -1,7 +1,8 @@
 let string = "";
 let buttons = document.querySelectorAll(".button");
 let expression = document.querySelector(".input");
-const operators = ["+", "-", "/", "%"];
+const operators = ["+", "-", "/", "%", "*"];
+let history = document.querySelector(".history");
 
 expression.addEventListener("input", (event) => {
   const validCharacters = /[0-9+\-*/.%]/g;
@@ -19,9 +20,10 @@ expression.addEventListener("keydown", (event) => {
     evaluate();
   } else if (operators.includes(key) && operators.includes(lastChar)) {
     event.preventDefault();
-  } else if (key === "*" && lastChar === "*" && secondLastChar === "*") {
-    event.preventDefault();
   }
+  // else if (key === "*" && lastChar === "*" && secondLastChar === "*") {
+  //   event.preventDefault();
+  // }
 });
 
 buttons.forEach((button) => {
@@ -42,19 +44,23 @@ buttons.forEach((button) => {
       if (string.includes("ERROR")) {
         clear();
       } else {
+        history.value = "";
         string = string.slice(0, -1);
         expression.value = string;
       }
     } else {
       if (operators.includes(buttonValue) && operators.includes(lastChar)) {
         // Do nothing
-      } else if (
-        buttonValue === "*" &&
-        lastChar === "*" &&
-        secondLastChar === "*"
-      ) {
-        // Do nothing
-      } else {
+      }
+      // else if (
+      //   buttonValue === "*" &&
+      //   lastChar === "*" &&
+      //   secondLastChar === "*"
+      // )
+      // {
+      //   // Do nothing
+      // }
+      else {
         string += buttonValue;
         expression.value = string;
       }
@@ -64,6 +70,7 @@ buttons.forEach((button) => {
 
 const evaluate = () => {
   try {
+    history.value = string;
     string = eval(string).toString();
     expression.value = string;
   } catch (error) {
@@ -75,4 +82,5 @@ const evaluate = () => {
 const clear = () => {
   string = "";
   expression.value = string;
+  history.value = string;
 };
